@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const colourSchema = new Schema({
-  colourName: {type: String, required: true, unique: true},
+  colourName: {type: String, required: true},
   colour: {type: Number, required: true},
   logoUrl: {type: String, required: true},
   frontUrl: {type: String, required: true},
@@ -11,8 +11,9 @@ const colourSchema = new Schema({
 
 const productSchema = new Schema({
   productId: {type: Number, required: true, unique: true},
+  productName: {type: String, required: true},
   colours: [colourSchema],
-})
+});
 
 const Product = mongoose.model('Product', productSchema);
 

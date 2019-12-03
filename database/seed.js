@@ -1,21 +1,54 @@
 const mongoose = require('mongoose');
-const {Colour, Product} = require('./database.js');
+const {Product} = require('./database.js');
 const db = require('./index.js');
+const unsplash = require('../APIs/unsplash.js');
+const faker = require('faker');
 
-const products = [...Array(100)]
-  .map((_, i) => i + 2001)
-  .map(productId => ({
-    productId, colours: {
-      colourName: 'colour ' + productId,
-      colour: productId,
-      logoUrl: 'logo url ' + productId,
-      frontUrl: 'front url ' + productId,
-      backUrl: 'back url ' + productId,
-    }
-  }))
-  .map(document => ({insertOne: {document}}))
+const productIdStart = 2001;
+const productCount = 100;
+const animals = ['dog', 'cat', 'bear', 'rabbit'];
+const colours = ['black', 'brown', 'white', 'grey'];
+const hex = {
+  black: 0x000000,
+  brown: 0x8b4513,
+  white: 0xffffff,
+  grey : 0x808080,
+};
+const perPage = 30;
 
-Product.deleteMany()
-  .then(() => Product.bulkWrite(products))
+const urls = {};
+Promise.all(colours.reduce((terms, colour) =>
+  [
+    ...terms,
+    ...animals.map(animal => {
+      urls[animal] = {};
+      return unsplash.search.photos(`${colour} ${animal}`, 1, perPage)
+        .then(result => result.json())
+        .then(json => urls[animal][colour] = json.results.map(result => result.urls.regular))
+    })
+  ]
+, []))
+  .then(() => Product.deleteMany())
+  .then(products => Product.bulkWrite(
+    [...Array(productCount)]
+      .map((_, i) => i + productIdStart)
+      .map(productId => {
+        const animal = animals[Math.floor(Math.random() * animals.length)];
+        return {
+            productId,
+            productName: `${faker.name.firstName()} the ${animal}`,
+            colours: colours.map(colourName => {
+            let start = Math.floor(Math.random() * perPage);
+            return {
+              colourName, colour: hex[colourName],
+              logoUrl: urls[animal][colourName][start],
+              frontUrl: urls[animal][colourName][++start % perPage],
+              backUrl: urls[animal][colourName][++start % perPage]
+            }
+          })
+        }
+      })
+      .map(document => ({insertOne: {document}}))
+  ))
   .catch(err => console.log(err.message))
   .finally(() => mongoose.connection.close());
