@@ -14,7 +14,6 @@ const productSchema = new Schema({
   colours: [colourSchema],
 })
 
-// const Colour = mongoose.model('Colour', colourSchema);
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = {/* Colour,  */Product};
+module.exports = {Product};

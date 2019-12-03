@@ -15,8 +15,7 @@ const products = [...Array(100)]
   }))
   .map(document => ({insertOne: {document}}))
 
-mongoose.connection.createCollection('products')
-  .then(() => mongoose.connection.dropCollection('products'))
+Product.deleteMany()
   .then(() => Product.bulkWrite(products))
-  .then(() => mongoose.connection.close())
-  .catch(err => console.log(err.message));
+  .catch(err => console.log(err.message))
+  .finally(() => mongoose.connection.close());
