@@ -3,4 +3,4 @@ global.fetch = require('node-fetch');
 
 const accessKey = 'UNSPLASH ACCESS KEY GOES HERE';
 
-module.exports = new Unsplash({accessKey});
+module.exports = new Unsplash({ accessKey });

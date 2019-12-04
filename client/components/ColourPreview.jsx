@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ColourPreview(props) {
+function ColourPreview() {
   return (
     <div className="ColourPreview">
       ColourPreview
