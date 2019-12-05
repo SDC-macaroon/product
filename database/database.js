@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+/* const db =  */require('./index.js');
 
 const { Schema } = mongoose;
 
@@ -18,4 +19,8 @@ const productSchema = new Schema({
 
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = { Product };
+const imageUrlsForColour = (productId, colourName) => {
+  return Product.findOne({ productId });
+};
+
+module.exports = { Product, imageUrlsForColour };
