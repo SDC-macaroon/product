@@ -23,4 +23,11 @@ const coloursForProduct = productId => Product
   .findOne({ productId }, 'colours.colourName')
   .then(result => result.colours.map(({ colourName }) => colourName));
 
-module.exports = { Product, coloursForProduct };
+const imageUrlsForColour = (productId, colourName) => Product
+  .findOne({ productId, 'colours.colourName': colourName }, 'colours.$')
+  .then(result => {
+    const { logoUrl, frontUrl, backUrl } = result.colours[0];
+    return Promise.resolve({ logoUrl, frontUrl, backUrl });
+  });
+
+module.exports = { Product, coloursForProduct, imageUrlsForColour };
