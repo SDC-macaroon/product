@@ -19,4 +19,8 @@ const productSchema = new Schema({
 
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = { Product };
+const coloursForProduct = productId => Product
+  .findOne({ productId }, 'colours.colourName')
+  .then(result => result.colours.map(({ colourName }) => colourName));
+
+module.exports = { Product, coloursForProduct };
