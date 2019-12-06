@@ -26,4 +26,7 @@ const imageUrlsForColour = (productId, colourName) => Product
     return Promise.resolve({ logoUrl, frontUrl, backUrl });
   });
 
-module.exports = { Product, imageUrlsForColour };
+const productData = productId => Product
+  .findOne({ productId });
+
+module.exports = { Product, imageUrlsForColour, productData };
