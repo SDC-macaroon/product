@@ -20,8 +20,8 @@ const productSchema = new Schema({
 const Product = mongoose.model('Product', productSchema);
 
 const coloursForProduct = productId => Product
-  .findOne({ productId }, 'colours.colourName')
-  .then(result => result.colours.map(({ colourName }) => colourName));
+  .findOne({ productId }, 'colours.colourName colours.colour')
+  .then(result => result.colours);
 
 const imageUrlsForColour = (productId, colourName) => Product
   .findOne({ productId, 'colours.colourName': colourName }, 'colours.$')
