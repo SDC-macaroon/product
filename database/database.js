@@ -19,6 +19,10 @@ const productSchema = new Schema({
 
 const Product = mongoose.model('Product', productSchema);
 
+const coloursForProduct = productId => Product
+  .findOne({ productId }, 'colours.colourName colours.colour')
+  .then(result => result.colours);
+
 const imageUrlsForColour = (productId, colourName) => Product
   .findOne({ productId, 'colours.colourName': colourName }, 'colours.$')
   .then(result => {
@@ -29,4 +33,9 @@ const imageUrlsForColour = (productId, colourName) => Product
 const productData = productId => Product
   .findOne({ productId });
 
-module.exports = { Product, imageUrlsForColour, productData };
+module.exports = {
+  Product,
+  coloursForProduct,
+  imageUrlsForColour,
+  productData,
+};
