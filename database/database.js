@@ -29,6 +29,10 @@ const condition = obj => {
   return newObj;
 };
 
+const coloursForProduct = productId => Product
+  .findOne({ productId }, 'colours.colourName colours.colour')
+  .then(result => result.colours);
+
 const imageUrlsForColour = (productId, colourName) => Product
   .findOne(condition({ productId, 'colours.colourName': colourName }), 'colours.$')
   .then(result => {
@@ -36,4 +40,12 @@ const imageUrlsForColour = (productId, colourName) => Product
     return Promise.resolve({ logoUrl, frontUrl, backUrl });
   });
 
-module.exports = { Product, imageUrlsForColour };
+const productData = productId => Product
+  .findOne({ productId });
+
+module.exports = {
+  Product,
+  coloursForProduct,
+  imageUrlsForColour,
+  productData,
+};
