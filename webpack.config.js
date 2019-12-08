@@ -5,8 +5,8 @@ module.exports = {
     productPage: './client/productPage/index.jsx',
   },
   output: {
-    path: path.resolve(__dirname, 'dist/productPage'),
-    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
   },
   module: {
     rules: [

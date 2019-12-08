@@ -4,7 +4,7 @@ const { coloursForProduct, imageUrlsForColour, productData } = require('../datab
 const app = express();
 const port = 1729;
 
-app.use(express.static('dist/productPage/'));
+app.use(express.static('dist', { index: 'productPage.html' }));
 
 app.get('/api/productPreview/:productId/colours', (req, res) => {
   coloursForProduct(req.params.productId)

@@ -22,8 +22,8 @@ coverage
 
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
-dist/productPage/*
-!dist/productPage/index.html
+dist/*
+!dist/productPage.html
 
 # API keys
 APIs/*
