@@ -31,7 +31,7 @@ Promise.all(colours.reduce((terms, colour) => [
       .map((_, i) => i + productIdStart)
       .map(productId => {
         const animal = animals[Math.floor(Math.random() * animals.length)];
-        const csi = Math.floor(Math.random() * 8); // Colour Slice Index
+        const csi = Math.floor(Math.random() * colours.length * 2); // Colour Slice Index
         return {
           productId,
           productName: `${faker.name.firstName()} the ${animal}`,
