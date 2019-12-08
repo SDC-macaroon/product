@@ -6,9 +6,13 @@ const port = 1729;
 
 app.use(express.static('dist/'));
 
-app.get('/api/productPreview/:productId/colours', (req, res) => {
-  coloursForProduct(req.params.productId)
-    .then(result => res.json(result));
+app.get('/api/productPreview/:productId/colours', (req, res, next) => {
+  const { productId } = req.params;
+  coloursForProduct(productId)
+    .then(result => (result === null
+      ? res.status(404).send(`No such product: ${productId}`)
+      : res.json(result)))
+    .catch(err => next(err));
 });
 
 app.get('/api/productPreview/:productId/:colourName', (req, res) => {

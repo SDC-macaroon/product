@@ -21,7 +21,7 @@ const Product = mongoose.model('Product', productSchema);
 
 const coloursForProduct = productId => Product
   .findOne({ productId }, 'colours.colourName colours.colour')
-  .then(result => result.colours);
+  .then(result => (result === null ? null : result.colours));
 
 const imageUrlsForColour = (productId, colourName) => Product
   .findOne({ productId, 'colours.colourName': colourName }, 'colours.$')
