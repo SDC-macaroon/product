@@ -30,7 +30,7 @@ const condition = obj => {
 };
 
 const coloursForProduct = productId => Product
-  .findOne({ productId }, 'colours.colourName colours.colour')
+  .findOne(condition({ productId }), 'colours.colourName colours.colour')
   .then(result => result.colours);
 
 const imageUrlsForColour = (productId, colourName) => Product
@@ -41,7 +41,7 @@ const imageUrlsForColour = (productId, colourName) => Product
   });
 
 const productData = productId => Product
-  .findOne({ productId });
+  .findOne(condition({ productId }));
 
 module.exports = {
   Product,
