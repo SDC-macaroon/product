@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   entry: {
     productPage: './client/productPage/index.jsx',
+    productList: './client/productList/index.jsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
