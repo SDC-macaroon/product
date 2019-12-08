@@ -1,5 +1,10 @@
 const express = require('express');
-const { coloursForProduct, imageUrlsForColour, productData } = require('../database/database');
+const {
+  coloursForProduct,
+  imageUrlsForColour,
+  productData,
+  allProducts,
+} = require('../database/database');
 
 const app = express();
 const port = 1729;
@@ -8,6 +13,11 @@ app.use(express.static('dist', { index: 'productList.html' }));
 app.use('/product/:productName/:productId', express.static('dist', { index: 'productPage.html' }));
 app.get('/product/:productId', (req, res) => {
   res.redirect(`/product/some-human-readable-description/${req.params.productId}`);
+});
+
+app.get('/api/productPreview/all', (req, res) => {
+  allProducts()
+    .then(result => res.json(result));
 });
 
 app.get('/api/productPreview/:productId/colours', (req, res) => {
