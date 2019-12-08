@@ -15,10 +15,13 @@ app.get('/api/productPreview/:productId/colours', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/productPreview/:productId/:colourName', (req, res) => {
-  imageUrlsForColour(req.params.productId, req.params.colourName)
-    .then(results => res.json(results))
-    .catch(err => res.json(err));
+app.get('/api/productPreview/:productId/:colourName', (req, res, next) => {
+  const { productId, colourName } = req.params;
+  imageUrlsForColour(productId, colourName)
+    .then(result => (result === null
+      ? res.status(404).send(`No such product/colour: ${productId}/${colourName}`)
+      : res.json(result)))
+    .catch(err => next(err));
 });
 
 app.get('/api/productPreview/:productId', (req, res) => {

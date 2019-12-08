@@ -26,8 +26,9 @@ const coloursForProduct = productId => Product
 const imageUrlsForColour = (productId, colourName) => Product
   .findOne({ productId, 'colours.colourName': colourName }, 'colours.$')
   .then(result => {
+    if (result === null) { return null; }
     const { logoUrl, frontUrl, backUrl } = result.colours[0];
-    return Promise.resolve({ logoUrl, frontUrl, backUrl });
+    return { logoUrl, frontUrl, backUrl };
   });
 
 const productData = productId => Product
