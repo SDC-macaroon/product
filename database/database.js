@@ -29,6 +29,8 @@ const condition = obj => {
   return newObj;
 };
 
+const allProducts = () => Product.find({}, '-_id productName productId');
+
 const coloursForProduct = productId => Product
   .findOne(condition({ productId }), 'colours.colourName colours.colour')
   .then(result => (result === null ? null : result.colours));
@@ -46,6 +48,7 @@ const productData = productId => Product
 
 module.exports = {
   Product,
+  allProducts,
   coloursForProduct,
   imageUrlsForColour,
   productData,
