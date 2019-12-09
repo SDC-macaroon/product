@@ -31,13 +31,14 @@ const condition = obj => {
 
 const coloursForProduct = productId => Product
   .findOne(condition({ productId }), 'colours.colourName colours.colour')
-  .then(result => result.colours);
+  .then(result => (result === null ? null : result.colours));
 
 const imageUrlsForColour = (productId, colourName) => Product
   .findOne(condition({ productId, 'colours.colourName': colourName }), 'colours.$')
   .then(result => {
+    if (result === null) { return null; }
     const { logoUrl, frontUrl, backUrl } = result.colours[0];
-    return Promise.resolve({ logoUrl, frontUrl, backUrl });
+    return { logoUrl, frontUrl, backUrl };
   });
 
 const productData = productId => Product
