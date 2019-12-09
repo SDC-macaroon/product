@@ -19,12 +19,22 @@ const productSchema = new Schema({
 
 const Product = mongoose.model('Product', productSchema);
 
+const condition = obj => {
+  const newObj = {};
+  Object.keys(obj).forEach(key => {
+    if (key === 'productId' && Number.isNaN(parseInt(obj[key], 10))) {
+      newObj.productName = obj[key][0].toUpperCase() + obj[key].slice(1).toLowerCase().replace(/-/g, ' ');
+    } else { newObj[key] = obj[key]; }
+  });
+  return newObj;
+};
+
 const coloursForProduct = productId => Product
-  .findOne({ productId }, 'colours.colourName colours.colour')
+  .findOne(condition({ productId }), 'colours.colourName colours.colour')
   .then(result => (result === null ? null : result.colours));
 
 const imageUrlsForColour = (productId, colourName) => Product
-  .findOne({ productId, 'colours.colourName': colourName }, 'colours.$')
+  .findOne(condition({ productId, 'colours.colourName': colourName }), 'colours.$')
   .then(result => {
     if (result === null) { return null; }
     const { logoUrl, frontUrl, backUrl } = result.colours[0];
@@ -32,7 +42,7 @@ const imageUrlsForColour = (productId, colourName) => Product
   });
 
 const productData = productId => Product
-  .findOne({ productId });
+  .findOne(condition({ productId }));
 
 module.exports = {
   Product,
