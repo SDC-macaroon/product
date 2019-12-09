@@ -31,10 +31,11 @@ Promise.all(colours.reduce((terms, colour) => [
       .map((_, i) => i + productIdStart)
       .map(productId => {
         const animal = animals[Math.floor(Math.random() * animals.length)];
+        const csi = Math.floor(Math.random() * colours.length * 2); // Colour Slice Index
         return {
           productId,
           productName: `${faker.name.firstName()} the ${animal}`,
-          colours: colours.map(colourName => {
+          colours: [...colours.slice(0, csi), ...colours.slice(csi + 1)].map(colourName => {
             let start = Math.floor(Math.random() * perPage);
             return {
               colourName,
