@@ -2,4 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ColourPreview from './components/ColourPreview';
 
-ReactDOM.render(<ColourPreview />, document.getElementById('app'));
+const [,,, productId] = window.location.pathname.split('/');
+
+ReactDOM.render(<ColourPreview productId={productId} />, document.getElementById('app'));
