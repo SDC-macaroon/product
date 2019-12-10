@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../styles.css';
 
 function ColourPreview({ productId }) {
-  const [productData, setProductData] = useState({});
+  const [, setProductData] = useState({});
   const [selectedColour, setSelectedColour] = useState({});
 
   useEffect(() => {
@@ -15,14 +15,13 @@ function ColourPreview({ productId }) {
       });
   }, []);
 
-  const { productName } = productData;
   const { frontUrl, backUrl, logoUrl } = selectedColour;
 
   return frontUrl && backUrl && logoUrl ? (
     <div className="ColourPreview">
-      <img alt={`front of ${productName}`} className="frontPreview" src={frontUrl} />
-      <img alt={`back of ${productName}`} className="backPreview" src={backUrl} />
-      <img alt={`${productName} logo`} className="logoPreview" src={logoUrl} />
+      <div className="backPreview" style={{ backgroundImage: `url(${backUrl})` }} />
+      <div className="frontPreview" style={{ backgroundImage: `url(${frontUrl})` }} />
+      <div className="logoPreview" style={{ backgroundImage: `url(${logoUrl})` }} />
     </div>
   ) : 'loading';
 }
