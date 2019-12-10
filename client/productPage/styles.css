@@ -17,10 +17,23 @@
 }
 
 .ColourSelector {
+  display: flex;
+  align-items: center;
   position: absolute;
   right: 16px;
   bottom: 16px;
   background-color: white;
-  padding: 16px;
+  padding: 8px;
   border-radius: 1000px;
+}
+
+.swatch {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #eee;
+}
+
+.colourName {
+  margin: 0 10px;
 }
