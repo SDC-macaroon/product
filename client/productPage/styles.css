@@ -24,7 +24,26 @@
   bottom: 16px;
   background-color: white;
   padding: 8px;
+}
+
+.ColourSelector.view {
   border-radius: 1000px;
+}
+
+.ColourSelector.selector>.swatchGrid {
+  display: flex;
+  align-items: center;
+}
+
+.ColourSelector.selector>.done {
+  color: deeppink;
+  padding: 3px 10px;
+  border-left: 1px solid #eee;
+  margin-left: 10px;
+}
+
+.ColourSelector.selector>.swatchGrid>.swatch {
+  margin-right: 3px;
 }
 
 .swatch {

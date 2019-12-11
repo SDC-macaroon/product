@@ -4,7 +4,7 @@ import '../styles.css';
 import ColourSelector from './ColourSelector';
 
 function ColourPreview({ productId }) {
-  const [, setProductData] = useState({});
+  const [productData, setProductData] = useState({});
   const [selectedColour, setSelectedColour] = useState({});
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function ColourPreview({ productId }) {
       <div className="backPreview" style={{ backgroundImage: `url(${backUrl})` }} />
       <div className="frontPreview" style={{ backgroundImage: `url(${frontUrl})` }} />
       <div className="logoPreview" style={{ backgroundImage: `url(${logoUrl})` }} />
-      <ColourSelector selectedColour={selectedColour} />
+      <ColourSelector colours={productData.colours} selectedColour={selectedColour} />
     </div>
   ) : 'loading';
 }
