@@ -11,7 +11,6 @@ const productCount = 100;
 )
   .then(overwrite => {
     if (overwrite) {
-      console.log('OVERWRITING!');
       const productIdStart = 2001;
       const animals = ['dog', 'cat', 'bear', 'rabbit'];
       const colours = ['black', 'brown', 'white', 'grey'];
@@ -62,7 +61,6 @@ const productCount = 100;
         .catch(err => console.error(err.message))
         .finally(() => mongoose.connection.close());
     } else {
-      console.log('not overwriting');
       mongoose.connection.close();
     }
   });
