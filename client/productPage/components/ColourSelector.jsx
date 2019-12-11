@@ -20,7 +20,7 @@ const ColourSelector = ({ colours, selectedColour }) => {
       </div>
     )
     : (
-      <div className="ColourSelector view" onClick={() => setSelectMode(true)} onKeyDown={() => setSelectMode(true)} role="menu" tabIndex="0">
+      <div className="ColourSelector view" onClick={() => setSelectMode(true)}>
         <div className="swatch" style={{ backgroundColor }} />
         <div className="colourName">{colourName}</div>
       </div>
