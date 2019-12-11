@@ -31,7 +31,7 @@ const ColourSelector = ({ colours, selectedIndex, selectIndex }) => {
     : (
       <div className="ColourSelector view clickable" onClick={() => setSelectMode(true)}>
         <div className="swatch" style={{ backgroundColor }} />
-        <div className="colourName">{colourName}</div>
+        <div className="colourName">{`${colourName[0].toUpperCase()}${colourName.slice(1)}`}</div>
       </div>
     )
   );
