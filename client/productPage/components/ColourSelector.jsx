@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 const toHex = n => `#${n.toString(16).padStart(6, 0)}`;
 
-const ColourSelector = ({ colours, selectedColour }) => {
-  const { colourName, colour } = selectedColour;
+const ColourSelector = ({ colours, selectedIndex }) => {
+  const { colourName, colour } = colours[selectedIndex];
   const backgroundColor = toHex(colour);
 
   const [selectMode, setSelectMode] = useState(false);
@@ -35,10 +35,7 @@ ColourSelector.propTypes = {
       colour: PropTypes.number.isRequired,
     }),
   ).isRequired,
-  selectedColour: PropTypes.shape({
-    colourName: PropTypes.string.isRequired,
-    colour: PropTypes.number.isRequired,
-  }).isRequired,
+  selectedIndex: PropTypes.number.isRequired,
 };
 
 export default ColourSelector;
