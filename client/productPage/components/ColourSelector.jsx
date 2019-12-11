@@ -20,7 +20,9 @@ const ColourSelector = ({ colours, selectedIndex, selectIndex }) => {
               className="swatch"
               style={{ backgroundColor: toHex(c) }}
               onClick={() => selectIndex(i)}
-            />
+            >
+              {selectedIndex === i ? <div className={`swatchSelection ${colourName}`} /> : ''}
+            </div>
           ))}
         </div>
         <div className="done" onClick={() => setSelectMode(false)}>Done</div>
