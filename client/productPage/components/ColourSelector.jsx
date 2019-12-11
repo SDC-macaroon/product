@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 const toHex = n => `#${n.toString(16).padStart(6, 0)}`;
 
-const ColourSelector = ({ colours, selectedIndex, selectIndex }) => {
+const ColourSelector = ({
+  colours,
+  selectedIndex,
+  selectIndex,
+  productName,
+}) => {
   const { colourName, colour } = colours[selectedIndex];
   const backgroundColor = toHex(colour);
 
@@ -14,11 +19,12 @@ const ColourSelector = ({ colours, selectedIndex, selectIndex }) => {
     ? (
       <div className="ColourSelector selector">
         <div className="swatchGrid">
-          {colours.map(({ colour: c }, i) => (
+          {colours.map(({ colour: c, colourName: name }, i) => (
             <div
               key={c}
               className="swatch clickable"
               style={{ backgroundColor: toHex(c) }}
+              title={`${name[0].toUpperCase()}${name.slice(1)} ${productName}`}
               onClick={() => selectIndex(i)}
             >
               {selectedIndex === i ? <div className={`swatchSelection ${colourName}`} /> : ''}
@@ -46,6 +52,7 @@ ColourSelector.propTypes = {
   ).isRequired,
   selectedIndex: PropTypes.number.isRequired,
   selectIndex: PropTypes.func.isRequired,
+  productName: PropTypes.string.isRequired,
 };
 
 export default ColourSelector;

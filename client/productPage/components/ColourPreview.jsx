@@ -27,6 +27,7 @@ function ColourPreview({ productId }) {
         colours={productData.colours}
         selectedIndex={selectedIndex}
         selectIndex={setSelectedIndex}
+        productName={productData.productName}
       />
     </div>
   ) : 'loading';
