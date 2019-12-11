@@ -17,7 +17,7 @@ const ColourSelector = ({ colours, selectedIndex, selectIndex }) => {
           {colours.map(({ colour: c }, i) => (
             <div
               key={c}
-              className="swatch"
+              className="swatch clickable"
               style={{ backgroundColor: toHex(c) }}
               onClick={() => selectIndex(i)}
             >
@@ -25,11 +25,11 @@ const ColourSelector = ({ colours, selectedIndex, selectIndex }) => {
             </div>
           ))}
         </div>
-        <div className="done" onClick={() => setSelectMode(false)}>Done</div>
+        <div className="done clickable" onClick={() => setSelectMode(false)}>Done</div>
       </div>
     )
     : (
-      <div className="ColourSelector view" onClick={() => setSelectMode(true)}>
+      <div className="ColourSelector view clickable" onClick={() => setSelectMode(true)}>
         <div className="swatch" style={{ backgroundColor }} />
         <div className="colourName">{colourName}</div>
       </div>
