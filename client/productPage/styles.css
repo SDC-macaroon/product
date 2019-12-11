@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Khula&display=swap');
+
 .ColourPreview {
   position: relative;
   display: grid;
   width: 100%;
   grid-template: repeat(2, 1fr) / 3fr 8fr;
+  font-family: 'Khula', sans-serif;
+  font-size: 20px;
 }
 
 .ColourPreview>div {
