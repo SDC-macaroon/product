@@ -23,7 +23,11 @@ function ColourPreview({ productId }) {
       <div className="backPreview" style={{ backgroundImage: `url(${backUrl})` }} />
       <div className="frontPreview" style={{ backgroundImage: `url(${frontUrl})` }} />
       <div className="logoPreview" style={{ backgroundImage: `url(${logoUrl})` }} />
-      <ColourSelector colours={productData.colours} selectedIndex={selectedIndex} />
+      <ColourSelector
+        colours={productData.colours}
+        selectedIndex={selectedIndex}
+        selectIndex={setSelectedIndex}
+      />
     </div>
   ) : 'loading';
 }

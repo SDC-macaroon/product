@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const toHex = n => `#${n.toString(16).padStart(6, 0)}`;
 
-const ColourSelector = ({ colours, selectedIndex }) => {
+const ColourSelector = ({ colours, selectedIndex, selectIndex }) => {
   const { colourName, colour } = colours[selectedIndex];
   const backgroundColor = toHex(colour);
 
@@ -14,7 +14,14 @@ const ColourSelector = ({ colours, selectedIndex }) => {
     ? (
       <div className="ColourSelector selector">
         <div className="swatchGrid">
-          {colours.map(({ colour: c }) => <div key={c} className="swatch" style={{ backgroundColor: toHex(c) }} />)}
+          {colours.map(({ colour: c }, i) => (
+            <div
+              key={c}
+              className="swatch"
+              style={{ backgroundColor: toHex(c) }}
+              onClick={() => selectIndex(i)}
+            />
+          ))}
         </div>
         <div className="done" onClick={() => setSelectMode(false)}>Done</div>
       </div>
@@ -36,6 +43,7 @@ ColourSelector.propTypes = {
     }),
   ).isRequired,
   selectedIndex: PropTypes.number.isRequired,
+  selectIndex: PropTypes.func.isRequired,
 };
 
 export default ColourSelector;
