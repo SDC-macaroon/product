@@ -20,8 +20,8 @@ const productSchema = new Schema({
 const Product = mongoose.model('Product', productSchema);
 
 const condition = obj => {
-  // Takes a mongoose condition object, and returns it with productId replaced with productName if
-  // productId is not parsable as a number (in which case, we assume it's text)
+  // Takes a mongoose condition object, that looks like: {productId: ...} and returns it as
+  // is, if productId is a number, or as {productName: ...} if productId is a string
   const newObj = {};
   Object.keys(obj).forEach(key => {
     if (key === 'productId' && Number.isNaN(parseInt(obj[key], 10))) {
