@@ -20,6 +20,8 @@ const productSchema = new Schema({
 const Product = mongoose.model('Product', productSchema);
 
 const condition = obj => {
+  // Takes a mongoose condition object, that looks like: {productId: ...} and returns it as
+  // is, if productId is a number, or as {productName: ...} if productId is a string
   const newObj = {};
   Object.keys(obj).forEach(key => {
     if (key === 'productId' && Number.isNaN(parseInt(obj[key], 10))) {
@@ -28,6 +30,9 @@ const condition = obj => {
   });
   return newObj;
 };
+
+const productIdAndName = productId => Product
+  .findOne(condition({ productId }), '-_id productId productName');
 
 const allProducts = () => Product.find({}, '-_id productName productId');
 
@@ -52,4 +57,5 @@ module.exports = {
   coloursForProduct,
   imageUrlsForColour,
   productData,
+  productIdAndName,
 };

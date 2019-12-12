@@ -4,6 +4,7 @@ const {
   imageUrlsForColour,
   productData,
   allProducts,
+  productIdAndName,
 } = require('../database/database');
 
 const app = express();
@@ -11,8 +12,10 @@ const port = 1729;
 
 app.use(express.static('dist', { index: 'productList.html' }));
 app.use('/product/:productName/:productId', express.static('dist', { index: 'productPage.html' }));
-app.get('/product/:productId', (req, res) => {
-  res.redirect(`/product/some-human-readable-description/${req.params.productId}`);
+app.get('/product/:productId', (req, res, next) => {
+  productIdAndName(req.params.productId)
+    .then(({ productId, productName }) => res.redirect(`/product/${productName.toLowerCase().replace(/ /g, '-')}/${productId}`))
+    .catch(err => next(err));
 });
 
 app.get('/api/productPreview/all', (req, res) => {
