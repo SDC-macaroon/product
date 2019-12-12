@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Khula&display=swap');
+
 .ColourPreview {
+  position: relative;
   display: grid;
   width: 100%;
   grid-template: repeat(2, 1fr) / 3fr 8fr;
+  font-family: 'Khula', sans-serif;
+  font-size: 20px;
 }
 
 .ColourPreview>div {
@@ -13,4 +18,64 @@
   width: 100%;
   padding-top: 100%;
   grid-area: 1 / 2 / 3 / 3;
+}
+
+.ColourSelector {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  background-color: white;
+  padding: 8px;
+}
+
+.ColourSelector.view {
+  border-radius: 1000px;
+}
+
+.ColourSelector.selector>.swatchGrid {
+  display: flex;
+  align-items: center;
+}
+
+.ColourSelector.selector>.done {
+  color: deeppink;
+  padding: 3px 10px;
+  border-left: 1px solid #eee;
+  margin-left: 10px;
+}
+
+.ColourSelector.selector>.swatchGrid>.swatch {
+  margin-right: 3px;
+}
+
+.swatch {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #eee;
+}
+
+.swatch>.swatchSelection {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+.swatch>.swatchSelection.white {
+  border-color: black;
+}
+
+.colourName {
+  margin: 0 10px;
+}
+
+.clickable {
+  cursor: pointer;
 }
