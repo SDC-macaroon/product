@@ -4,4 +4,4 @@ import ColourPreview from './components/ColourPreview';
 
 const [,,, productId] = window.location.pathname.split('/');
 
-ReactDOM.render(<ColourPreview productId={productId} />, document.getElementById('app'));
+ReactDOM.render(<ColourPreview productId={productId} />, document.getElementById('philipApp'));
