@@ -3,6 +3,7 @@
 .ColourPreview {
   position: relative;
   display: grid;
+  grid-gap: 4px;
   width: 100%;
   grid-template: repeat(2, 1fr) / 3fr 8fr;
   font-family: 'Khula', sans-serif;
@@ -12,6 +13,7 @@
 .ColourPreview>div {
   background-size: cover;
   background-position: center;
+  border-radius: 5px;
 }
 
 .frontPreview {
