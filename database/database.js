@@ -36,6 +36,15 @@ const productIdAndName = productId => Product
 
 const allProducts = () => Product.find({}, '-_id productName productId');
 
+const createProduct = productData => Product.create(productData);
+
+const updateProduct = (productId, productData) => Product.findOneAndUpdate(
+  { productId },
+  productData,
+);
+
+const deleteProduct = productId => Product.deleteOne({ productId });
+
 const coloursForProduct = productId => Product
   .findOne(condition({ productId }), 'colours.colourName colours.colour')
   .then(result => (result === null ? null : result.colours));
@@ -58,4 +67,7 @@ module.exports = {
   imageUrlsForColour,
   productData,
   productIdAndName,
+  createProduct,
+  updateProduct,
+  deleteProduct,
 };
