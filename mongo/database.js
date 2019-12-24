@@ -38,8 +38,7 @@ const allProducts = () => Product.find({}, '-_id productName productId');
 
 const createProduct = productData => Product.create(productData);
 
-const updateProduct = (productId, productData) => Product.findOneAndUpdate(
-  { productId },
+const updateProduct = (productId, productData) => Product.findOneAndUpdagte({ productId } ,
   productData,
 );
 

@@ -9,7 +9,7 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
-} = require('../database/database');
+} = require('../mongo/database');
 
 const app = express();
 const port = 1729;
@@ -22,6 +22,25 @@ app.use('/product/:productName/:productId', express.static('dist', { index: 'pro
 app.get('/product/:productId', (req, res, next) => {
   productIdAndName(req.params.productId)
     .then(({ productId, productName }) => res.redirect(`/product/${productName.toLowerCase().replace(/ /g, '-')}/${productId}`))
+    .catch(err => next(err));
+});
+
+app.post('/product', (req, res, next) => {
+  const data = req.body;
+  createProduct(data)
+    .then(result => res.json(result))
+    .catch(err => next(err));
+});
+
+app.put('/product/:productId', (req, res, next) => {
+  updateProduct(req.param.productId, req.body)
+    .then(result => res.json(result))
+    .catch(err => next(err));
+});
+
+app.delete('/product/:productId', (req, res, next) => {
+  deleteProduct(req.params.productId)
+    .then(result => res.json(result))
     .catch(err => next(err));
 });
 
@@ -54,25 +73,6 @@ app.get('/api/productPreview/:productId', (req, res, next) => {
     .then(result => (result === null
       ? res.status(404).send(`No such product: ${productId}`)
       : res.json(result)))
-    .catch(err => next(err));
-});
-
-app.post('/product', (req, res, next) => {
-  const data = req.body;
-  createProduct(data)
-    .then(result => res.json(result))
-    .catch(err => next(err));
-});
-
-app.put('/product/:productId', (req, res, next) => {
-  updateProduct(req.params.productId, req.body)
-    .then(result => res.json(result))
-    .catch(err => next(err));
-});
-
-app.delete('/product/:productId', (req, res, next) => {
-  deleteProduct(req.params.productId)
-    .then(result => res.json(result))
     .catch(err => next(err));
 });
 
