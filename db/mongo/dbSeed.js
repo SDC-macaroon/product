@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const faker = require('faker');
 const { Product } = require('./database.js');
-const unsplash = require('../APIs/unsplash.js');
+const unsplash = require('../../APIs/unsplash.js');
 
 const productCount = 100;
 

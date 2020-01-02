@@ -29,3 +29,6 @@ dist/*
 # API keys
 APIs/*
 !APIs/*.example.*
+
+# CSV files
+*.csv 

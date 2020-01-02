@@ -1,10 +1,6 @@
 const faker = require('faker');
 const unsplash = require('../APIs/unsplash.js');
 
-// Generate 10 million products
-// const productCount = 10000000;
-const productCount = 100;
-
 const animals = ['dog', 'cat', 'bear', 'rabbit'];
 const colours = ['black', 'brown', 'white', 'grey'];
 const hex = {
@@ -20,7 +16,7 @@ const currPage = 1;
 
 const urls = {};
 
-const generateData = () => new Promise((resolve, reject) => {
+const generateData = (productCount, productIdStart) => new Promise((resolve, reject) => {
   Promise.all(colours.reduce((terms, colour) => [
     ...terms,
     ...animals.map(animal => {
@@ -35,16 +31,10 @@ const generateData = () => new Promise((resolve, reject) => {
     .then(() => {
       const productArr = [];
       const colourArr = [];
-      let imageId = 0;
       for (let i = 0; i < productCount; i++) {
-        let percent = 10;
-        if (i % 1000000 === 0) {
-          console.log(`Generating data ${percent}%`);
-          percent += 10;
-        }
         const animal = animals[Math.floor(Math.random() * animals.length)];
         productArr.push({
-          id: i + 1,
+          id: i + productIdStart,
           productName: `${faker.name.firstName()} the ${animal}`,
         });
 
@@ -54,13 +44,12 @@ const generateData = () => new Promise((resolve, reject) => {
           const name = colours[j];
           let start = Math.floor(Math.random() * perPage);
           colourArr.push({
-            id: ++imageId,
             colourName: name,
             colour: hex[name],
             logoUrl: urls[animal][name][start],
             frontUrl: urls[animal][name][++start % perPage],
             backUrl: urls[animal][name][++start % perPage],
-            productId: i + 1,
+            productId: i + productIdStart,
           });
         }
       }
