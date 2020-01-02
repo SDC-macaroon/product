@@ -1,0 +1,31 @@
+config:
+  target: "http://127.0.0.1:1729"
+  processor: "./generator.js"
+  http:
+    timeout: 3
+  phases:
+    - duration: 10
+      arrivalRate: 1
+    - duration: 10
+      arrivalRate: 10
+    - duration: 10
+      arrivalRate: 100
+    - duration: 10
+      arrivalRate: 1000
+scenarios:
+  - name: "GET"
+    flow:
+      - function: generateRandomId
+      - get:
+          url: "/api/productPreview/{{ id }}"
+  - name: "POST"
+    flow:
+      - function: generatePostPayload
+      - post:
+          url: "/api/product"
+          json:
+            productId: "{{ productId }}"
+            productName: "{{ productName }}"
+            colours: "{{ colours }}"
+      - delete:
+          url: "/api/product/{{ productId }}"
