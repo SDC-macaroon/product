@@ -9,7 +9,6 @@ const hex = {
   grey: 0x808080,
 };
 
-const perPage = 30;
 const urls = {};
 
 // Hard code the start id to 10000001

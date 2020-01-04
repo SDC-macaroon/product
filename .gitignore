@@ -31,4 +31,7 @@ APIs/*
 !APIs/*.example.*
 
 # CSV files
-*.csv 
+*.csv
+
+# newrelic credentials
+newrelic.js

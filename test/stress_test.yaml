@@ -3,6 +3,7 @@ config:
   processor: "./generator.js"
   http:
     timeout: 3
+    pool: 10
   phases:
     - duration: 10
       arrivalRate: 1
@@ -27,5 +28,3 @@ scenarios:
             productId: "{{ productId }}"
             productName: "{{ productName }}"
             colours: "{{ colours }}"
-      - delete:
-          url: "/api/product/{{ productId }}"
